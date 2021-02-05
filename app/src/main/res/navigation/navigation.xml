@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/signinFragment2">
+    <fragment
+        android:id="@+id/signinFragment2"
+        android:name="com.example.apptechtask.Fragment.SigninFragment"
+        android:label="Signin"
+        tools:layout="@layout/fragment_signin">
+        <action
+            android:id="@+id/action_signinFragment2_to_signupFragment"
+            app:destination="@id/signupFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_signinFragment2_to_dashboardFragment"
+            app:destination="@id/dashboardFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/signupFragment"
+        android:name="com.example.apptechtask.Fragment.SignupFragment"
+        android:label="Signup"
+        tools:layout="@layout/fragment_signup">
+        <action
+            android:id="@+id/action_signupFragment_to_dashboardFragment"
+            app:destination="@id/dashboardFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/dashboardFragment"
+        android:name="com.example.apptechtask.Fragment.DashboardFragment"
+        android:label="fragment_dashboard"
+        tools:layout="@layout/fragment_dashboard" />
+</navigation>
