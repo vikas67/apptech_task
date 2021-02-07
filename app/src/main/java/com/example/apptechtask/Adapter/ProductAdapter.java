@@ -1,16 +1,17 @@
 package com.example.apptechtask.Adapter;
 
-import android.arch.lifecycle.MutableLiveData;
+
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
 import com.example.apptechtask.List.ProductList.Allproduct;
-import com.example.apptechtask.List.ProductList.ProductList;
 import com.example.apptechtask.R;
+import com.example.apptechtask.databinding.RowProductBinding;
 
 import java.util.List;
 
@@ -18,6 +19,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.Viewhold
 
     Context context;
     List<Allproduct> allproducts;
+    RowProductBinding binding;
 
     public ProductAdapter(List<Allproduct> allproducts) {
         this.allproducts = allproducts;
@@ -27,11 +29,17 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.Viewhold
     @Override
     public Viewholder onCreateViewHolder(ViewGroup viewGroup, int i) {
         context = viewGroup.getContext();
-        return new Viewholder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.row_product, null));
+        binding = RowProductBinding.inflate(LayoutInflater.from(viewGroup.getContext()), viewGroup, false);
+        return new Viewholder(binding);
     }
 
     @Override
-    public void onBindViewHolder(ProductAdapter.Viewholder viewholder, int i) {
+    public void onBindViewHolder(ProductAdapter.Viewholder holder, int i) {
+        Allproduct list = allproducts.get(i);
+        binding.productName.setText(list.getName());
+        binding.productAmt.setText(context.getResources().getString(R.string.rs_symbol) + list.getActPrice());
+        binding.productDicountAmt.setText(context.getResources().getString(R.string.rs_symbol) + list.getDisPrice());
+        Glide.with(context).load("https://yallatager.com/" + list.getThumb()).into(binding.productImg);
 
     }
 
@@ -41,8 +49,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.Viewhold
     }
 
     public class Viewholder extends RecyclerView.ViewHolder {
-        public Viewholder(View itemView) {
-            super(itemView);
+        public Viewholder(RowProductBinding itemView) {
+            super(itemView.getRoot());
         }
     }
 }
