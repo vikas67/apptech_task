@@ -6,10 +6,14 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.apptechtask.Fragment.DashboardFragmentDirections;
 import com.example.apptechtask.List.ProductList.Allproduct;
+import com.example.apptechtask.Other.Constants;
 import com.example.apptechtask.R;
 import com.example.apptechtask.databinding.RowProductBinding;
 
@@ -20,6 +24,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.Viewhold
     Context context;
     List<Allproduct> allproducts;
     RowProductBinding binding;
+
 
     public ProductAdapter(List<Allproduct> allproducts) {
         this.allproducts = allproducts;
@@ -39,8 +44,11 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.Viewhold
         binding.productName.setText(list.getName());
         binding.productAmt.setText(context.getResources().getString(R.string.rs_symbol) + list.getActPrice());
         binding.productDicountAmt.setText(context.getResources().getString(R.string.rs_symbol) + list.getDisPrice());
-        Glide.with(context).load("https://yallatager.com/" + list.getThumb()).into(binding.productImg);
-
+        Glide.with(context).load(Constants.IMAGE_URL + list.getThumb()).into(binding.productImg);
+        binding.mainlayout.setOnClickListener(v -> {
+            final NavController navController = Navigation.findNavController(v);
+            navController.navigate(DashboardFragmentDirections.actionDashboardFragmentToProductFragment(list.getName(), list.getActPrice(), list.getDisPrice(), list.getThumb()));
+        });
     }
 
     @Override

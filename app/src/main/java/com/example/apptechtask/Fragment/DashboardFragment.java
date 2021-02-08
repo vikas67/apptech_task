@@ -2,7 +2,6 @@ package com.example.apptechtask.Fragment;
 
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,17 +37,35 @@ public class DashboardFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         productViewmodel = ViewModelProviders.of(this).get(ProductViewmodel.class);
+        Viewpagersilder();
+
+
         productViewmodel.Product().observe(getActivity(), productList -> {
-            Log.e(TAG, "dataFt: " + productList.getAllproducts().size());
-            binding.productRecyclerview.setAdapter(new ProductAdapter(productList.getAllproducts()));
+            if (productList.getErrorCode() == 200) {
+                binding.noProduct.setVisibility(View.GONE);
+                binding.productRecyclerview.setVisibility(View.VISIBLE);
+                binding.productRecyclerview.setAdapter(new ProductAdapter(productList.getAllproducts()));
+            } else {
+                binding.productRecyclerview.setVisibility(View.GONE);
+                binding.noProduct.setVisibility(View.VISIBLE);
+            }
+            binding.progressbar.setVisibility(View.GONE);
         });
     }
+
+    private void Viewpagersilder() {
+
+    }
+
+    
 
     @Override
     public void onStart() {
         super.onStart();
         ((AppCompatActivity) getActivity()).getSupportActionBar().show();
+
     }
+
 }
 
 

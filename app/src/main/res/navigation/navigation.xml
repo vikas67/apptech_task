@@ -22,7 +22,9 @@
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@id/dashboardFragment"
+            app:popUpToInclusive="true"/>
     </fragment>
     <fragment
         android:id="@+id/signupFragment"
@@ -35,11 +37,47 @@
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@id/dashboardFragment"
+            app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_signupFragment_to_signinFragment2"
+            app:destination="@id/signinFragment2"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@id/signinFragment2" />
     </fragment>
     <fragment
         android:id="@+id/dashboardFragment"
         android:name="com.example.apptechtask.Fragment.DashboardFragment"
         android:label="fragment_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_dashboard">
+        <action
+            android:id="@+id/action_dashboardFragment_to_productFragment"
+            app:destination="@id/productFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/productFragment"
+        android:name="com.example.apptechtask.Fragment.ProductFragment"
+        android:label="fragment_product"
+        tools:layout="@layout/fragment_product" >
+        <argument
+            android:name="ProductName"
+            app:argType="string" />
+        <argument
+            android:name="productAmt"
+            app:argType="string" />
+        <argument
+            android:name="ProductDisAmt"
+            app:argType="string" />
+        <argument
+            android:name="ProductThumb"
+            app:argType="string" />
+    </fragment>
 </navigation>
